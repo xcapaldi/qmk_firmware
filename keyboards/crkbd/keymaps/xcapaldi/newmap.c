@@ -62,13 +62,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC, \
                                  KC_GESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
                                  KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-                                                            KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,   MO(1) \
+                                                            KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,   MO(0) \
   ),
   
   [_LAYERS] = LAYOUT_split_3x6_3( \
-                                 _______,   TO(5),   TO(9), XXXXXXX,   TO(8), XXXXXXX,          XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,  KC_DEL, \
-                                 _______,   TO(7),   TO(4),   TO(3), XXXXXXX, XXXXXXX,          XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX, XXXXXXX, \
-                                 _______, XXXXXXX, XXXXXXX,   TO(6),   TO(2), XXXXXXX,          XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, _______, \
+                                 _______,   TG(5),   TG(9), XXXXXXX,   TG(8), XXXXXXX,          XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,  KC_DEL, \
+                                 _______,   TG(7),   TG(4),   TG(3), XXXXXXX, XXXXXXX,          XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX, XXXXXXX, \
+                                 _______, XXXXXXX, XXXXXXX,   TG(6),   TG(2), XXXXXXX,          XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, _______, \
                                                             _______, _______, _______,          _______, _______, _______ \
   ),
 
@@ -103,15 +103,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_CONTROL] = LAYOUT_split_3x6_3( \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, XXXXXXX, _______, \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(6), XXXXXXX,          XXXXXXX,  KC_INS, KC_HOME, KC_PGUP, XXXXXXX, XXXXXXX, \
+                                  _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(6), XXXXXXX,          XXXXXXX,  KC_INS, KC_HOME, KC_RGUP, XXXXXXX, XXXXXXX, \
                                   _______, XXXXXXX, XXXXXXX,   TG(6), XXXXXXX, XXXXXXX,          XXXXXXX,  KC_DEL,  KC_END, KC_PGDN, XXXXXXX, _______, \
                                                              _______, _______, _______,          _______, _______,   TG(6) \
   ),
 
   [_MEDIA] = LAYOUT_split_3x6_3( \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
-                                _______,   TG(7), XXXXXXX, XXXXXXX,   TG(7), XXXXXXX,          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX, XXXXXXX, \
-                                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MSTP, KC_MUTE, KC_MPLY, XXXXXXX, XXXXXXX, _______, \
+                                _______,   TG(7), XXXXXXX, XXXXXXX,   TG(7), XXXXXXX,          KC_MPRV, KC_POLD, KC_VOLU, KC_MNXT, XXXXXXX, XXXXXXX, \
+                                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KX_MSTP, KC_MUTE, KC_MPLY, XXXXXXX, XXXXXXX, _______, \
                                                            _______, _______, _______,          _______, _______,   TG(7) \
   ),
 
@@ -285,23 +285,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_MOUSE);
         }
         return false;
-        //case RGB_MOD:
-        //  #ifdef RGBLIGHT_ENABLE
-        //    if (record->event.pressed) {
-        //      rgblight_mode(RGB_current_mode);
-        //      rgblight_step();
-        //      RGB_current_mode = rgblight_config.mode;
-        //    }
-        //  #endif
-        //  return false;
-        //case RGBRST:
-        //  #ifdef RGBLIGHT_ENABLE
-        //    if (record->event.pressed) {
-        //      eeconfig_update_rgblight_default();
-        //      rgblight_enable();
-        //      RGB_current_mode = rgblight_config.mode;
-        //    }
-        //  #endif
+    case RGB_MOD:
+      #ifdef RGBLIGHT_ENABLE
+        if (record->event.pressed) {
+          rgblight_mode(RGB_current_mode);
+          rgblight_step();
+          RGB_current_mode = rgblight_config.mode;
+        }
+      #endif
+      return false;
+    case RGBRST:
+      #ifdef RGBLIGHT_ENABLE
+        if (record->event.pressed) {
+          eeconfig_update_rgblight_default();
+          rgblight_enable();
+          RGB_current_mode = rgblight_config.mode;
+        }
+      #endif
       break;
   }
   return true;
