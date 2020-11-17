@@ -82,16 +82,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUMBERS] = LAYOUT_split_3x6_3( \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PAST,    KC_7,    KC_8,    KC_9, KC_PPLS, _______, \
-                                  _______, XXXXXXX, XXXXXXX,   TG(3),   TG(3), XXXXXXX,          KC_PSLS,    KC_4,    KC_5,    KC_6, KC_PMNS, KC_PENT, \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PEQL,    KC_1,    KC_2,    KC_3, KC_PDOT, _______, \
-                                                             _______, _______, _______,          _______, _______,    KC_0 \
+                                  _______, XXXXXXX, XXXXXXX,   TG(3),   TG(3), XXXXXXX,          KC_PSLS,    KC_4,    KC_5,    KC_6, KC_PMNS, KC_PEQL, \
+                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             KC_0,    KC_1,    KC_2,    KC_3, KC_PDOT, _______, \
+                                                             _______, _______, _______,          _______, _______,   TG(3) \
   ),
 
   [_SYMBOLS] = LAYOUT_split_3x6_3( \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_TILD, KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, _______, \
                                   _______, XXXXXXX,   TG(4), XXXXXXX,   TG(4), XXXXXXX,           KC_GRV,  KC_DLR, KC_PERC, KC_CIRC, KC_MINS, XXXXXXX, \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PIPE, KC_EXLM,   KC_AT, KC_HASH, KC_BSLS, _______, \
-                                                             _______, _______, _______,          _______, _______, KC_RPRN \
+                                                             _______, _______, _______,          _______, _______,  TG(4) \
   ),
 
   [_FUNCTIONS] = LAYOUT_split_3x6_3( \
