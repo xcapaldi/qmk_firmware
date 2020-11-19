@@ -5,7 +5,7 @@
 
 // in the future, should use (1U<<_LAYER_NAME) instead, but needs to be moved to keymap,c
 #define L_QWERTY 0
-#define L_LAYERS 2
+#define L_PROG 2
 #define L_VI 4
 #define L_NUMBERS 8
 #define L_SYMBOLS 16
@@ -14,6 +14,7 @@
 #define L_MEDIA 128
 #define L_SHORTCUTS 256
 #define L_MOUSE 512
+#define L_GAME 1024
 #define L_ADJUST 20
 #define L_ADJUST_TRI 22
 
@@ -25,8 +26,8 @@ const char *read_layer_state(void) {
   case L_QWERTY:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: QWERTY");
     break;
-  case L_LAYERS:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: LAYERS");
+  case L_PROG:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: PROG");
     break;
   case L_VI:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: VI");
@@ -51,6 +52,9 @@ const char *read_layer_state(void) {
     break;
   case L_MOUSE:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: MOUSE");
+    break;
+  case L_GAME:
+    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: GAME");
     break;
   case L_ADJUST:
   case L_ADJUST_TRI:

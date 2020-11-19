@@ -30,7 +30,7 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _PROG 1
+#define _LAYERS 1
 #define _VI 2
 #define _NUMBERS 3
 #define _SYMBOLS 4
@@ -39,11 +39,10 @@ extern uint8_t is_master;
 #define _MEDIA 7
 #define _SHORTCUTS 8
 #define _MOUSE 9
-#define _GAME 10
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  PROG,
+  LAYERS,
   VI,
   NUMBERS,
   SYMBOLS,
@@ -51,8 +50,7 @@ enum custom_keycodes {
   CONTROL,
   MEDIA,
   SHORTCUTS,
-  MOUSE,
-  GAME
+  MOUSE
 };
 
 enum macro_keycodes {
@@ -61,82 +59,75 @@ enum macro_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3( \
-                                  KC_TAB, LT(5, KC_Q), LT(9, KC_W),        KC_E, LT(8, KC_R),        KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC, \
-                                 KC_GESC, LT(7, KC_A), LT(4, KC_S), LT(3, KC_D), LT(1, KC_F),        KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
-                                 KC_LSFT,        KC_Z,        KC_X, LT(6, KC_C), LT(2, KC_V),        KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-                                                                                KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,  KC_APP \
+                                  KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC, \
+                                 KC_GESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
+                                 KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
+                                                            KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,   MO(1) \
   ),
-   
-  [_PROG] = LAYOUT_split_3x6_3( \
-                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,  KC_DEL, \
-                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX, XXXXXXX, \
-                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, _______, \
-                                                            _______, _______, _______,          _______, _______,  TG(10) \
+  
+  [_LAYERS] = LAYOUT_split_3x6_3( \
+                                 _______,   TO(5),   TO(9), XXXXXXX,   TO(8), XXXXXXX,          XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,  KC_DEL, \
+                                 _______,   TO(7),   TO(4),   TO(3), XXXXXXX, XXXXXXX,          XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX, XXXXXXX, \
+                                 _______, XXXXXXX, XXXXXXX,   TO(6),   TO(2), XXXXXXX,          XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, _______, \
+                                                            _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_VI] = LAYOUT_split_3x6_3( \
                              _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
-                             _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX, \
-                             _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
-                                                        _______, _______, _______,          _______, _______, _______ \
+                             _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(2), XXXXXXX,          KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX, \
+                             _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(2), XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
+                                                        _______, _______, _______,          _______, _______,   TG(2) \
   ),
 
 
   [_NUMBERS] = LAYOUT_split_3x6_3( \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PAST,    KC_7,    KC_8,    KC_9, KC_PPLS, _______, \
-                                  _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,          KC_PSLS,    KC_4,    KC_5,    KC_6, KC_PMNS, KC_PEQL, \
+                                  _______, XXXXXXX, XXXXXXX,   TG(3),   TG(3), XXXXXXX,          KC_PSLS,    KC_4,    KC_5,    KC_6, KC_PMNS, KC_PEQL, \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             KC_0,    KC_1,    KC_2,    KC_3, KC_PDOT, _______, \
-                                                             _______, _______, _______,          _______, _______, _______ \
+                                                             _______, _______, _______,          _______, _______,   TG(3) \
   ),
 
   [_SYMBOLS] = LAYOUT_split_3x6_3( \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_TILD, KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, _______, \
-                                  _______, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX,           KC_GRV,  KC_DLR, KC_PERC, KC_CIRC, KC_MINS, XXXXXXX, \
+                                  _______, XXXXXXX,   TG(4), XXXXXXX,   TG(4), XXXXXXX,           KC_GRV,  KC_DLR, KC_PERC, KC_CIRC, KC_MINS, XXXXXXX, \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PIPE, KC_EXLM,   KC_AT, KC_HASH, KC_BSLS, _______, \
-                                                             _______, _______, _______,          _______, _______, _______ \
+                                                             _______, _______, _______,          _______, _______,  TG(4) \
   ),
 
   [_FUNCTIONS] = LAYOUT_split_3x6_3( \
-                                    _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
-                                    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F4,   KC_F5,   KC_F6,  KC_F11, XXXXXXX, \
+                                    _______,   TG(5), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
+                                    _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(5), XXXXXXX,          XXXXXXX,   KC_F4,   KC_F5,   KC_F6,  KC_F11, XXXXXXX, \
                                     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F12, _______, \
-                                                               _______, _______, _______,          _______, _______, _______ \
+                                                               _______, _______, _______,          _______, _______,   TG(5) \
   ),
 
   [_CONTROL] = LAYOUT_split_3x6_3( \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, XXXXXXX, _______, \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,  KC_INS, KC_HOME, KC_PGUP, XXXXXXX, XXXXXXX, \
-                                  _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,          XXXXXXX,  KC_DEL,  KC_END, KC_PGDN, XXXXXXX, _______, \
-                                                             _______, _______, _______,          _______, _______, _______ \
+                                  _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(6), XXXXXXX,          XXXXXXX,  KC_INS, KC_HOME, KC_PGUP, XXXXXXX, XXXXXXX, \
+                                  _______, XXXXXXX, XXXXXXX,   TG(6), XXXXXXX, XXXXXXX,          XXXXXXX,  KC_DEL,  KC_END, KC_PGDN, XXXXXXX, _______, \
+                                                             _______, _______, _______,          _______, _______,   TG(6) \
   ),
 
   [_MEDIA] = LAYOUT_split_3x6_3( \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
-                                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX, XXXXXXX, \
+                                _______,   TG(7), XXXXXXX, XXXXXXX,   TG(7), XXXXXXX,          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX, XXXXXXX, \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MSTP, KC_MUTE, KC_MPLY, XXXXXXX, XXXXXXX, _______, \
-                                                           _______, _______, _______,          _______, _______, _______ \
+                                                           _______, _______, _______,          _______, _______,   TG(7) \
   ),
 
   [_SHORTCUTS] = LAYOUT_split_3x6_3( \
-                                    _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          KC_MSEL, KC_MAIL, KC_CALC, KC_MYCM, XXXXXXX, _______, \
-                                    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, \
+                                    _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(8), XXXXXXX,          KC_MSEL, KC_MAIL, KC_CALC, KC_MYCM, XXXXXXX, _______, \
+                                    _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(8), XXXXXXX,          XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, \
                                     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,            RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
-                                                               _______, _______, _______,          _______, _______, _______ \
+                                                               _______, _______, _______,          _______, _______,   TG(8) \
   ),
 
   [_MOUSE] = LAYOUT_split_3x6_3( \
-                                _______, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_WH_D, KC_WH_U, XXXXXXX, KC_ACL0, _______, \
-                                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_ACL1, XXXXXXX, \
+                                _______, XXXXXXX,   TG(9), XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_WH_D, KC_WH_U, XXXXXXX, KC_ACL0, _______, \
+                                _______, XXXXXXX, XXXXXXX, XXXXXXX,   TG(9), XXXXXXX,          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_ACL1, XXXXXXX, \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_ACL2, _______, \
-                                                           _______, _______, _______,          _______, _______, _______ \
-  ),
-
-  [_GAME] = LAYOUT_split_3x6_3( \
-                                  KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC, \
-                                 KC_GESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
-                                 KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-                                                            KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,  TG(10) \
-  ),
+                                                           _______, _______, _______,          _______, _______,   TG(9) \
+  )
 };
 
 //int RGB_current_mode;
@@ -227,12 +218,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         persistent_default_layer_set(1UL<<_QWERTY);
       }
       return false;
-    case PROG:
+    case LAYERS:
       if (record->event.pressed) {
-        layer_on(_PROG);
+        layer_on(_LAYERS);
         //update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
-        layer_off(_PROG);
+        layer_off(_LAYERS);
         //update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
       return false;
@@ -294,13 +285,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_MOUSE);
         }
         return false;
-    case GAME:
-        if (record->event.pressed) {
-          layer_on(_GAME);
-        } else {
-          layer_off(_GAME);
-        }
-	return false;
         //case RGB_MOD:
         //  #ifdef RGBLIGHT_ENABLE
         //    if (record->event.pressed) {

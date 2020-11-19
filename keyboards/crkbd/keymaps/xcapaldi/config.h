@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // TAPPING_FORCE_HOLD not compatible with TT
 //#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 150
+#define TAPPING_TERM 300
 
 #define TAPPING_TOGGLE 2
 
