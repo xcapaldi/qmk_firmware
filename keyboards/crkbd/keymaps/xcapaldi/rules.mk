@@ -1,3 +1,6 @@
+DYNAMIC_MACRO_ENABLE = yes
+COMBO_ENABLE = yes
+
 
 # If you want to change the display of OLED, you need to change here
 SRC +=  ./lib/glcdfont.c \

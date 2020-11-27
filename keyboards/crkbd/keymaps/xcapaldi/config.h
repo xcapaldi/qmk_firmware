@@ -34,9 +34,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // TAPPING_FORCE_HOLD not compatible with TT
 //#define TAPPING_FORCE_HOLD
+#define PERMISSIVE_HOLD
 #define TAPPING_TERM 300
 
 #define TAPPING_TOGGLE 2
+
+#define COMBO_COUNT 2
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM

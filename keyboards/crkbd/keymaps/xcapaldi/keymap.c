@@ -59,83 +59,96 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
+enum combos {
+  SFTBSPC_DEL,
+  SFTSPACE_TAB
+};
+
+const uint16_t PROGMEM sftbspc_combo[] = {KC_LSFT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM sftspace_combo[] = {KC_LSFT, KC_SPACE, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [SFTBSPC_DEL] = COMBO(sftbspc_combo, KC_DEL),
+  [SFTSPACE_TAB] = COMBO(sftspace_combo, KC_TAB)
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3( \
-                                  KC_TAB, LT(5, KC_Q), LT(9, KC_W),        KC_E, LT(8, KC_R),        KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC, \
-                                 KC_GESC, LT(7, KC_A), LT(4, KC_S), LT(3, KC_D), LT(1, KC_F),        KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
-                                 KC_LSFT,        KC_Z,        KC_X, LT(6, KC_C), LT(2, KC_V),        KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-                                                                                KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,  KC_APP \
+                                 KC_GRAVE, LT(5, KC_Q),        KC_W, LT(9, KC_E), LT(8, KC_R), KC_T,           KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLASH, \
+                                  KC_LGUI, LT(7, KC_A), LT(4, KC_S), LT(3, KC_D), LT(1, KC_F), KC_G,           KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,   KC_QUOT, \
+                                  DM_REC1,        KC_Z,        KC_X, LT(6, KC_C), LT(2, KC_V), KC_B,           KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,   DM_PLY1, \
+                                                    LALT_T(KC_MENU), LCTL_T(KC_ESCAPE),     KC_LSFT,       KC_SPACE, KC_BSPC, KC_ENT \
   ),
    
   [_PROG] = LAYOUT_split_3x6_3( \
-                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,  KC_DEL, \
+                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_LCBR, KC_RCBR, XXXXXXX, XXXXXXX,  TG(10), \
                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          XXXXXXX, KC_LPRN, KC_RPRN, XXXXXXX, XXXXXXX, XXXXXXX, \
                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_LBRC, KC_RBRC, XXXXXXX, XXXXXXX, _______, \
-                                                            _______, _______, _______,          _______, _______,  TG(10) \
+                                                            _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_VI] = LAYOUT_split_3x6_3( \
-                             _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
+                             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                              _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX, XXXXXXX, \
                              _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
                                                         _______, _______, _______,          _______, _______, _______ \
   ),
 
-
+  
   [_NUMBERS] = LAYOUT_split_3x6_3( \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PAST,    KC_7,    KC_8,    KC_9, KC_PPLS, _______, \
-                                  _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,          KC_PSLS,    KC_4,    KC_5,    KC_6, KC_PMNS, KC_PEQL, \
+                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PPLS,    KC_7,    KC_8,    KC_9, KC_PAST, XXXXXXX, \
+                                  _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,          KC_PMNS,    KC_4,    KC_5,    KC_6, KC_PSLS, KC_PEQL, \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             KC_0,    KC_1,    KC_2,    KC_3, KC_PDOT, _______, \
                                                              _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_SYMBOLS] = LAYOUT_split_3x6_3( \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_TILD, KC_AMPR, KC_ASTR, KC_LPRN, KC_UNDS, _______, \
-                                  _______, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX,           KC_GRV,  KC_DLR, KC_PERC, KC_CIRC, KC_MINS, XXXXXXX, \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_PIPE, KC_EXLM,   KC_AT, KC_HASH, KC_BSLS, _______, \
+                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_AMPR, KC_ASTR, KC_LPRN, XXXXXXX, XXXXXXX, \
+                                  _______, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX,          KC_UNDS,  KC_DLR, KC_PERC, KC_CIRC, XXXXXXX, XXXXXXX, \
+                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_EXLM,   KC_AT, KC_HASH, XXXXXXX, _______, \
                                                              _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_FUNCTIONS] = LAYOUT_split_3x6_3( \
-                                    _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
+                                    XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F10, XXXXXXX, \
                                     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F4,   KC_F5,   KC_F6,  KC_F11, XXXXXXX, \
                                     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,   KC_F1,   KC_F2,   KC_F3,  KC_F12, _______, \
                                                                _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_CONTROL] = LAYOUT_split_3x6_3( \
-                                  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, XXXXXXX, _______, \
+                                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, XXXXXXX, XXXXXXX, \
                                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,  KC_INS, KC_HOME, KC_PGUP, XXXXXXX, XXXXXXX, \
                                   _______, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,          XXXXXXX,  KC_DEL,  KC_END, KC_PGDN, XXXXXXX, _______, \
                                                              _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_MEDIA] = LAYOUT_split_3x6_3( \
-                                _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
+                                XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX, XXXXXXX, \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MSTP, KC_MUTE, KC_MPLY, XXXXXXX, XXXXXXX, _______, \
                                                            _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_SHORTCUTS] = LAYOUT_split_3x6_3( \
-                                    _______, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          KC_MSEL, KC_MAIL, KC_CALC, KC_MYCM, XXXXXXX, _______, \
+                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX,          KC_MSEL, KC_MAIL, KC_CALC, KC_MYCM, XXXXXXX, XXXXXXX, \
                                     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, \
                                     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,            RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, \
                                                                _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_MOUSE] = LAYOUT_split_3x6_3( \
-                                _______, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_WH_D, KC_WH_U, XXXXXXX, KC_ACL0, _______, \
+                                XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX,          XXXXXXX, KC_WH_D, KC_WH_U, XXXXXXX, KC_ACL0, XXXXXXX, \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_ACL1, XXXXXXX, \
                                 _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_ACL2, _______, \
                                                            _______, _______, _______,          _______, _______, _______ \
   ),
 
   [_GAME] = LAYOUT_split_3x6_3( \
-                                  KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC, \
-                                 KC_GESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
-                                 KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-                                                            KC_LGUI, KC_LCTL,  KC_SPC,        KC_ENT, KC_RALT,  TG(10) \
+                                KC_GRAVE,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLASH, \
+                                 KC_LGUI,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,          KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,   KC_QUOT, \
+                                 DM_REC1,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,          KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,   DM_PLY1, \
+                                                           KC_LALT, KC_LCTL,  KC_LSFT,      KC_SPACE, KC_BSPC,  KC_ENT \
   ),
 };
 
